@@ -1,0 +1,39 @@
+{
+  "nav": {
+    "home": "作品集",
+    "skills": "技能",
+    "projects": "项目",
+    "contact": "联系",
+    "langSwitch": "EN"
+  },
+  "hero": {
+    "greeting": "你好，我是",
+    "name": "严雪",
+    "title": "机器视觉算法工程师",
+    "bio": "拥有 3 年+ 机器视觉与工业物联网实战经验，具备"算法研发(Python) + 工程落地(C#) + 边缘部署(C++)"的完整技术闭环能力。精通 SOTA 视觉模型（PatchCore、YOLO）及 2.5D 视觉技术，擅长通过模型量化及 ONNX Runtime 技术解决工业现场落地痛点。"
+  },
+  "skills": {
+    "title": "技能",
+    "frontend": "机器视觉",
+    "backend": "开发语言",
+    "tools": "工具与部署",
+    "other": "其他"
+  },
+  "projects": {
+    "title": "项目作品",
+    "viewCode": "查看源码",
+    "viewDemo": "在线演示",
+    "techStack": "技术栈",
+    "viewDetails": "查看详情"
+  },
+  "contact": {
+    "title": "联系方式",
+    "email": "邮箱",
+    "social": "社交媒体"
+  },
+  "footer": {
+    "copyright": "© 2024 版权所有",
+    "email": "联系邮箱",
+    "backToTop": "返回顶部"
+  }
+}

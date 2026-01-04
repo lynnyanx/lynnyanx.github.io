@@ -1,0 +1,39 @@
+{
+  "nav": {
+    "home": "Portfolio",
+    "skills": "Skills",
+    "projects": "Projects",
+    "contact": "Contact",
+    "langSwitch": "中文"
+  },
+  "hero": {
+    "greeting": "Hello, I'm",
+    "name": "Lynn Yan",
+    "title": "Machine Vision Algorithm Engineer",
+    "bio": "Over 3 years of experience in machine vision and industrial IoT. Full-stack capabilities spanning algorithm R&D (Python), engineering deployment (C#), and edge deployment (C++). Expert in SOTA vision models (PatchCore, YOLO) and 2.5D vision technology, specializing in industrial deployment optimization via ONNX Runtime."
+  },
+  "skills": {
+    "title": "Skills",
+    "frontend": "Machine Vision",
+    "backend": "Languages & Frameworks",
+    "tools": "Tools & Deployment",
+    "other": "Other"
+  },
+  "projects": {
+    "title": "Projects",
+    "viewCode": "View Code",
+    "viewDemo": "Live Demo",
+    "techStack": "Tech Stack",
+    "viewDetails": "View Details"
+  },
+  "contact": {
+    "title": "Contact",
+    "email": "Email",
+    "social": "Social Media"
+  },
+  "footer": {
+    "copyright": "© 2024 All Rights Reserved",
+    "email": "Contact Email",
+    "backToTop": "Back to Top"
+  }
+}

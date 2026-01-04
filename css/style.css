@@ -1,0 +1,1128 @@
+/* ============================================
+   CSS Variables - 蓝白冷色调配色方案
+   需求: 6.1, 6.4
+   ============================================ */
+:root {
+  /* 主色调 - 蓝色系强调色 */
+  --primary-color: #2563eb;
+  --primary-light: #3b82f6;
+  --primary-dark: #1d4ed8;
+  --primary-hover: #1e40af;
+  
+  /* 背景色 - 白色/浅灰色 */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  
+  /* 文字色 */
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-light: #94a3b8;
+  --text-inverse: #ffffff;
+  
+  /* 边框色 */
+  --border-color: #e2e8f0;
+  --border-light: #f1f5f9;
+  
+  /* 阴影 */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-card: 0 2px 8px rgba(37, 99, 235, 0.08);
+  
+  /* 字体 */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+  
+  /* 间距 */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+  
+  /* 圆角 */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+  
+  /* 过渡 */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 350ms ease;
+}
+
+/* ============================================
+   Reset and Base Styles
+   ============================================ */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--primary-dark);
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* ============================================
+   Typography
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-primary);
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1rem; }
+h6 { font-size: 0.875rem; }
+
+p {
+  margin-bottom: var(--spacing-md);
+  color: var(--text-secondary);
+}
+
+/* ============================================
+   Layout - Container
+   ============================================ */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.section {
+  padding: var(--spacing-3xl) 0;
+}
+
+.section-title {
+  font-size: 1.75rem;
+  margin-bottom: var(--spacing-xl);
+  text-align: center;
+  color: var(--text-primary);
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--primary-color);
+  margin: var(--spacing-sm) auto 0;
+  border-radius: var(--radius-full);
+}
+
+
+/* ============================================
+   Header Component
+   ============================================ */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+  z-index: 1000;
+  padding: var(--spacing-md) 0;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+.nav-link {
+  color: var(--text-secondary);
+  font-weight: 500;
+  padding: var(--spacing-xs) var(--spacing-sm);
+}
+
+.nav-link:hover {
+  color: var(--primary-color);
+}
+
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.lang-switch:hover {
+  background: var(--bg-secondary);
+  color: var(--primary-color);
+}
+
+/* ============================================
+   Hero Section
+   ============================================ */
+.hero {
+  padding-top: calc(60px + var(--spacing-3xl));
+  padding-bottom: var(--spacing-3xl);
+  background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  text-align: center;
+}
+
+.hero-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  border: 4px solid var(--bg-primary);
+  box-shadow: var(--shadow-lg);
+  margin: 0 auto var(--spacing-lg);
+}
+
+.hero-name {
+  font-size: 2.5rem;
+  margin-bottom: var(--spacing-xs);
+  color: var(--text-primary);
+}
+
+.hero-title {
+  font-size: 1.25rem;
+  color: var(--primary-color);
+  font-weight: 500;
+  margin-bottom: var(--spacing-lg);
+}
+
+.hero-bio {
+  max-width: 600px;
+  margin: 0 auto var(--spacing-xl);
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-md);
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  font-size: 1.25rem;
+}
+
+.social-link:hover {
+  background: var(--primary-color);
+  color: var(--text-inverse);
+}
+
+/* ============================================
+   Skills Section
+   ============================================ */
+.skills {
+  background: var(--bg-primary);
+}
+
+.skills-grid {
+  display: grid;
+  gap: var(--spacing-xl);
+}
+
+.skill-category,
+.skill-group {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  border: 1px solid var(--border-color);
+}
+
+.skill-category-title,
+.skill-group-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.skill-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-xs) var(--spacing-md);
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.skill-tag:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+/* Skill level indicator (optional) */
+.skill-level {
+  display: flex;
+  gap: 2px;
+  margin-left: var(--spacing-xs);
+}
+
+.skill-level-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--border-color);
+}
+
+.skill-level-dot.active {
+  background: var(--primary-color);
+}
+
+
+/* ============================================
+   Projects Section
+   ============================================ */
+.projects {
+  background: var(--bg-secondary);
+}
+
+.projects-grid {
+  display: grid;
+  gap: var(--spacing-lg);
+}
+
+.project-card {
+  background: var(--bg-primary);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-card);
+}
+
+.project-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.project-thumbnail {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: var(--bg-tertiary);
+}
+
+.project-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-content {
+  padding: var(--spacing-lg);
+}
+
+.project-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-primary);
+}
+
+.project-description {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-md);
+  line-height: 1.6;
+}
+
+.project-tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-md);
+}
+
+.tech-tag {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+
+/* ============================================
+   Project Type Tags - 项目类型标签
+   需求: 3.5 - 不同项目类型的标签样式
+   ============================================ */
+.project-type-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-bottom: var(--spacing-sm);
+}
+
+/* AI 类型 - 紫色系 */
+.project-type-tag.type-purple {
+  background: rgba(139, 92, 246, 0.1);
+  color: #7c3aed;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+/* Web 类型 - 绿色系 */
+.project-type-tag.type-green {
+  background: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+/* 桌面应用 - 蓝色系 */
+.project-type-tag.type-blue {
+  background: rgba(59, 130, 246, 0.1);
+  color: #2563eb;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+/* 其他类型 - 灰色系 */
+.project-type-tag.type-gray {
+  background: rgba(107, 114, 128, 0.1);
+  color: #6b7280;
+  border: 1px solid rgba(107, 114, 128, 0.2);
+}
+
+.project-links {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.project-link-primary,
+.demo-link {
+  background: var(--primary-color);
+  color: var(--text-inverse);
+}
+
+.project-link-primary:hover,
+.demo-link:hover {
+  background: var(--primary-dark);
+  color: var(--text-inverse);
+}
+
+.project-link-secondary,
+.code-link {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+}
+
+.project-link-secondary:hover,
+.code-link:hover {
+  background: var(--bg-secondary);
+  color: var(--primary-color);
+}
+
+/* ============================================
+   Footer Component
+   ============================================ */
+.footer {
+  background: var(--bg-primary);
+  border-top: 1px solid var(--border-color);
+  padding: var(--spacing-xl) 0;
+  text-align: center;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.footer-copyright {
+  font-size: 0.875rem;
+  color: var(--text-light);
+}
+
+.footer-email {
+  color: var(--primary-color);
+  font-size: 0.875rem;
+}
+
+.footer-email:hover {
+  color: var(--primary-dark);
+}
+
+.back-to-top {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  margin-top: var(--spacing-md);
+}
+
+.back-to-top:hover {
+  background: var(--primary-color);
+  color: var(--text-inverse);
+}
+
+
+/* ============================================
+   Responsive Layout
+   需求: 4.1, 4.2, 4.3
+   ============================================ */
+
+/* Mobile First - 默认单列布局 (< 768px) */
+/* 需求 4.2: 屏幕宽度小于 768px 时切换为单列布局 */
+
+.skills-grid {
+  grid-template-columns: 1fr;
+}
+
+.projects-grid {
+  grid-template-columns: 1fr;
+}
+
+/* 移动端 Header 简化 */
+.header-nav .nav-link {
+  display: none;
+}
+
+/* 平板设备 (>= 768px) */
+/* 需求 4.3: 屏幕宽度大于等于 768px 时使用多列网格布局 */
+@media (min-width: 768px) {
+  .container {
+    padding: 0 var(--spacing-lg);
+  }
+  
+  .section {
+    padding: var(--spacing-3xl) 0;
+  }
+  
+  .header-nav .nav-link {
+    display: inline-block;
+  }
+  
+  .hero-avatar {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .hero-name {
+    font-size: 3rem;
+  }
+  
+  .hero-bio {
+    max-width: 700px;
+  }
+  
+  /* 技能区域 - 两列布局 */
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* 项目区域 - 两列布局 */
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .footer-content {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .back-to-top {
+    margin-top: 0;
+  }
+}
+
+/* 桌面设备 (>= 1024px) */
+@media (min-width: 1024px) {
+  .section {
+    padding: var(--spacing-3xl) 0;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .hero {
+    padding-top: calc(70px + var(--spacing-3xl));
+  }
+  
+  .hero-avatar {
+    width: 200px;
+    height: 200px;
+  }
+  
+  /* 技能区域 - 三列布局 */
+  .skills-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  /* 项目区域 - 三列布局 */
+  .projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 大屏设备 (>= 1280px) */
+@media (min-width: 1280px) {
+  .container {
+    padding: 0 var(--spacing-xl);
+  }
+  
+  h1 { font-size: 3rem; }
+  h2 { font-size: 2.5rem; }
+  
+  .hero-name {
+    font-size: 3.5rem;
+  }
+  
+  .hero-title {
+    font-size: 1.5rem;
+  }
+}
+
+
+/* ============================================
+   Transitions and Animations
+   需求: 6.3 - 平滑的过渡动画效果
+   ============================================ */
+
+/* 全局过渡效果 */
+a,
+button,
+.lang-switch,
+.social-link,
+.skill-tag,
+.project-card,
+.project-link,
+.back-to-top {
+  transition: all var(--transition-normal);
+}
+
+/* Header 滚动效果 */
+.header {
+  transition: box-shadow var(--transition-normal), background var(--transition-normal);
+}
+
+.header.scrolled {
+  box-shadow: var(--shadow-md);
+}
+
+/* 卡片悬停效果 */
+.project-card {
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+}
+
+.skill-category,
+.skill-group {
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.skill-category:hover,
+.skill-group:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* 按钮悬停效果 */
+.project-link {
+  transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+}
+
+.project-link:hover {
+  transform: translateY(-1px);
+}
+
+/* 社交链接悬停效果 */
+.social-link {
+  transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+}
+
+.social-link:hover {
+  transform: scale(1.1);
+}
+
+/* 技能标签悬停效果 */
+.skill-tag {
+  transition: border-color var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
+}
+
+.skill-tag:hover {
+  background: var(--bg-secondary);
+}
+
+/* 图片悬停效果 */
+.project-thumbnail {
+  transition: transform var(--transition-slow);
+}
+
+.project-card:hover .project-thumbnail {
+  transform: scale(1.05);
+}
+
+/* 头像悬停效果 */
+.hero-avatar {
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.hero-avatar:hover {
+  transform: scale(1.05);
+  box-shadow: var(--shadow-lg), 0 0 0 4px var(--primary-light);
+}
+
+/* 页面加载动画 */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 应用加载动画 */
+.hero {
+  animation: fadeIn var(--transition-slow) ease-out;
+}
+
+.section {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* 语言切换按钮动画 */
+.lang-switch {
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+/* 返回顶部按钮动画 */
+.back-to-top {
+  transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+}
+
+.back-to-top:hover {
+  transform: translateY(-2px);
+}
+
+/* 链接下划线动画 */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--primary-color);
+  transition: width var(--transition-fast), left var(--transition-fast);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* 减少动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================
+   Media Gallery Modal - 多媒体展示组件
+   需求: 3.6, 3.7 - 多媒体资源展示
+   ============================================ */
+.media-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 2000;
+  padding: var(--spacing-lg);
+  overflow-y: auto;
+}
+
+.media-modal.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.media-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: var(--spacing-lg);
+  color: var(--text-inverse);
+}
+
+.media-modal-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.media-modal-close {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-inverse);
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.media-modal-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.media-modal-content {
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Screenshot Carousel - 截图轮播 */
+.media-carousel {
+  position: relative;
+  width: 100%;
+  margin-bottom: var(--spacing-xl);
+}
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--bg-tertiary);
+}
+
+.carousel-slides {
+  display: flex;
+  transition: transform var(--transition-slow);
+}
+
+.carousel-slide {
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carousel-slide img {
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+}
+
+.carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: rgba(0, 0, 0, 0.5);
+  color: var(--text-inverse);
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  z-index: 10;
+}
+
+.carousel-nav:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.carousel-nav.prev {
+  left: var(--spacing-md);
+}
+
+.carousel-nav.next {
+  right: var(--spacing-md);
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.carousel-dot.active {
+  background: var(--primary-color);
+}
+
+/* GIF Display - GIF 动图展示 */
+.media-gif {
+  margin-bottom: var(--spacing-xl);
+}
+
+.media-gif-container {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-tertiary);
+}
+
+.media-gif img {
+  width: 100%;
+  max-height: 60vh;
+  object-fit: contain;
+}
+
+.media-section-title {
+  color: var(--text-inverse);
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+/* Architecture Diagram - 架构图展示 */
+.media-architecture {
+  margin-bottom: var(--spacing-xl);
+}
+
+.media-architecture-container {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-primary);
+  padding: var(--spacing-lg);
+}
+
+.media-architecture img {
+  width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+}
+
+/* Project Highlights - 项目亮点 */
+.media-highlights {
+  margin-bottom: var(--spacing-xl);
+}
+
+.highlights-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.highlight-tag {
+  padding: var(--spacing-xs) var(--spacing-md);
+  background: rgba(37, 99, 235, 0.2);
+  color: var(--primary-light);
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+}
+
+/* View More Button on Card */
+.project-view-media {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.project-view-media:hover {
+  background: var(--primary-color);
+  color: var(--text-inverse);
+}
+
+/* Responsive adjustments for modal */
+@media (max-width: 768px) {
+  .media-modal {
+    padding: var(--spacing-md);
+  }
+  
+  .media-modal-title {
+    font-size: 1.25rem;
+  }
+  
+  .carousel-nav {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+  
+  .carousel-slide img {
+    max-height: 50vh;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-primary {
+  color: var(--primary-color);
+}
+
+.bg-primary {
+  background-color: var(--bg-primary);
+}
+
+.bg-secondary {
+  background-color: var(--bg-secondary);
+}
