@@ -10,7 +10,8 @@
     "greeting": "Hello, I'm",
     "name": "Lynn Yan",
     "title": "Software Manager / AI Direction",
-    "bio": "Over 3 years of experience in machine vision and industrial IoT. Full-stack capabilities spanning algorithm R&D (Python), engineering deployment (C#), and edge deployment (C++). Expert in SOTA vision models (PatchCore, YOLO) and 2.5D vision technology, specializing in industrial deployment optimization via ONNX Runtime."
+    "bio": "Over 3 years of experience in machine vision and industrial IoT. Full-stack capabilities spanning algorithm R&D (Python), engineering deployment (C#), and edge deployment (C++). Expert in SOTA vision models (PatchCore, YOLO) and 2.5D vision technology, specializing in industrial deployment optimization via ONNX Runtime.",
+    "downloadResume": "📄 Download Resume"
   },
   "skills": {
     "title": "Skills",
@@ -34,6 +35,39 @@
   "footer": {
     "copyright": "© 2024 All Rights Reserved",
     "email": "Contact Email",
+    "phone": "Phone: 13298303895",
+    "wechat": "WeChat: lynnyanx",
     "backToTop": "Back to Top"
+  },
+  "projectDetail": {
+    "pageTitle": "Project Details",
+    "loading": "Loading...",
+    "notFound": "Project not found",
+    "errorTitle": "Error",
+    "backHome": "Back to Home",
+    "videos": "📹 Demo Videos",
+    "screenshots": "📷 Screenshots",
+    "architecture": "📐 Architecture",
+    "readme": "📖 Documentation",
+    "loadingReadme": "Loading documentation...",
+    "videoNotSupported": "Your browser does not support video playback",
+    "videoLoadError": "Failed to load video",
+    "noProject": "No project specified",
+    "noProjectMessage": "Please select a project from the homepage to view details",
+    "notFoundMessage": "Could not find this project. Please check if the link is correct",
+    "retry": "Retry",
+    "videoList": "Video List",
+    "viewPdf": "View PDF in New Tab",
+    "downloadArchitecture": "Download Architecture",
+    "pdfDescription": "Click the button below to view or download the architecture document",
+    "clickToEnlarge": "Click image to enlarge",
+    "architectureLoadError": "Failed to load architecture diagram",
+    "noReadme": "No detailed documentation available",
+    "projectOverview": "Project Overview",
+    "highlights": "Highlights",
+    "techStack": "Tech Stack",
+    "lightboxClose": "Close",
+    "lightboxPrev": "Previous",
+    "lightboxNext": "Next"
   }
 }

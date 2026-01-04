@@ -10,7 +10,8 @@
     "greeting": "你好，我是",
     "name": "严雪",
     "title": "软件经理/AI方向",
-    "bio": "拥有 3 年+ 机器视觉与工业物联网实战经验，具备「算法研发(Python) + 工程落地(C#) + 边缘部署(C++)」的完整技术闭环能力。精通 SOTA 视觉模型（PatchCore、YOLO）及 2.5D 视觉技术，擅长通过模型量化及 ONNX Runtime 技术解决工业现场落地痛点。"
+    "bio": "拥有 3 年+ 机器视觉与工业物联网实战经验，具备「算法研发(Python) + 工程落地(C#) + 边缘部署(C++)」的完整技术闭环能力。精通 SOTA 视觉模型（PatchCore、YOLO）及 2.5D 视觉技术，擅长通过模型量化及 ONNX Runtime 技术解决工业现场落地痛点。",
+    "downloadResume": "📄 下载简历"
   },
   "skills": {
     "title": "技能",
@@ -34,6 +35,39 @@
   "footer": {
     "copyright": "© 2024 版权所有",
     "email": "联系邮箱",
+    "phone": "手机: 13298303895",
+    "wechat": "微信: lynnyanx",
     "backToTop": "返回顶部"
+  },
+  "projectDetail": {
+    "pageTitle": "项目详情",
+    "loading": "加载中...",
+    "notFound": "项目不存在",
+    "errorTitle": "出错了",
+    "backHome": "返回首页",
+    "videos": "📹 演示视频",
+    "screenshots": "📷 项目截图",
+    "architecture": "📐 架构图",
+    "readme": "📖 项目文档",
+    "loadingReadme": "正在加载文档...",
+    "videoNotSupported": "您的浏览器不支持视频播放",
+    "videoLoadError": "视频加载失败",
+    "noProject": "未指定项目",
+    "noProjectMessage": "请从首页选择一个项目查看详情",
+    "notFoundMessage": "找不到该项目，请检查链接是否正确",
+    "retry": "重试",
+    "videoList": "视频列表",
+    "viewPdf": "在新标签页查看 PDF",
+    "downloadArchitecture": "下载架构图",
+    "pdfDescription": "点击下方按钮查看或下载项目架构图文档",
+    "clickToEnlarge": "点击图片放大查看",
+    "architectureLoadError": "架构图加载失败",
+    "noReadme": "暂无详细文档",
+    "projectOverview": "项目简介",
+    "highlights": "项目亮点",
+    "techStack": "技术栈",
+    "lightboxClose": "关闭",
+    "lightboxPrev": "上一张",
+    "lightboxNext": "下一张"
   }
 }

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="项目详情 - 作品集网站">
+  <title data-i18n="projectDetail.pageTitle">项目详情</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Header 组件 - 复用主站结构 -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="index.html" class="header-logo" data-i18n="nav.home">作品集</a>
+        <nav class="header-nav">
+          <a href="index.html#skills" class="nav-link" data-i18n="nav.skills">技能</a>
+          <a href="index.html#projects" class="nav-link" data-i18n="nav.projects">项目</a>
+          <a href="index.html#contact" class="nav-link" data-i18n="nav.contact">联系</a>
+          <button id="lang-toggle" class="lang-switch" aria-label="切换语言">
+            <span data-i18n="nav.langSwitch">EN</span>
+          </button>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="project-detail-main">
+    <!-- 面包屑导航 - 需求 1.2 -->
+    <nav class="breadcrumb" aria-label="面包屑导航">
+      <div class="container">
+        <a href="index.html" data-i18n="nav.home">首页</a>
+        <span class="breadcrumb-separator">›</span>
+        <a href="index.html#projects" data-i18n="nav.projects">项目</a>
+        <span class="breadcrumb-separator">›</span>
+        <span id="breadcrumb-project-name" class="breadcrumb-current">项目名称</span>
+      </div>
+    </nav>
+
+    <!-- 加载状态 - 需求 1.1 -->
+    <div id="loading-state" class="loading-state">
+      <div class="loading-content">
+        <div class="loading-spinner"></div>
+        <p class="loading-text" data-i18n="projectDetail.loading">加载中...</p>
+        <div class="loading-progress">
+          <div class="loading-progress-bar"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 错误状态 - 需求 1.1 -->
+    <div id="error-state" class="error-state" style="display: none;">
+      <div class="error-content">
+        <span class="error-icon">⚠️</span>
+        <h2 class="error-title" data-i18n="projectDetail.errorTitle">出错了</h2>
+        <p id="error-message" class="error-message" data-i18n="projectDetail.notFound">项目不存在</p>
+        <a href="index.html" class="btn-back" data-i18n="projectDetail.backHome">返回首页</a>
+      </div>
+    </div>
+
+    <!-- 项目内容区域 -->
+    <div id="project-content" class="project-content-wrapper" style="display: none;">
+      <!-- 项目头部 - 需求 1.4 -->
+      <section class="project-header">
+        <div class="container">
+          <div class="project-header-content">
+            <span id="project-type-tag" class="project-type-tag"></span>
+            <h1 id="project-title" class="project-detail-title"></h1>
+            <p id="project-description" class="project-detail-description"></p>
+            <div id="project-tech-stack" class="project-detail-tech-stack"></div>
+            <div id="project-links" class="project-detail-links"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 视频区域 - 需求 3.1, 3.2, 3.3, 3.4 -->
+      <section id="video-section" class="project-section video-section" style="display: none;">
+        <div class="container">
+          <h2 class="section-title" data-i18n="projectDetail.videos">📹 演示视频</h2>
+          <div class="video-content">
+            <div class="video-player-wrapper">
+              <video id="video-player" class="video-player" controls>
+                <source id="video-source" src="" type="video/mp4">
+                <p data-i18n="projectDetail.videoNotSupported">您的浏览器不支持视频播放</p>
+              </video>
+              <div id="video-error" class="video-error" style="display: none;">
+                <span class="video-error-icon">⚠️</span>
+                <p data-i18n="projectDetail.videoLoadError">视频加载失败</p>
+                <button id="video-retry-btn" class="video-retry-btn" data-i18n="projectDetail.retry">重试</button>
+              </div>
+            </div>
+            <div id="video-list" class="video-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 截图画廊 - 需求 4.1, 4.2, 4.3, 4.4 -->
+      <section id="gallery-section" class="project-section gallery-section" style="display: none;">
+        <div class="container">
+          <h2 class="section-title" data-i18n="projectDetail.screenshots">📷 项目截图</h2>
+          <div id="gallery-grid" class="gallery-grid"></div>
+        </div>
+      </section>
+
+      <!-- 架构图区域 - 需求 5.1, 5.2, 5.3 -->
+      <section id="architecture-section" class="project-section architecture-section" style="display: none;">
+        <div class="container">
+          <h2 class="section-title" data-i18n="projectDetail.architecture">📐 架构图</h2>
+          <div id="architecture-content" class="architecture-content"></div>
+        </div>
+      </section>
+
+      <!-- README 区域 - 需求 2.1, 2.2, 2.3, 2.4 -->
+      <section id="readme-section" class="project-section readme-section">
+        <div class="container">
+          <h2 class="section-title" data-i18n="projectDetail.readme">📖 项目文档</h2>
+          <div id="readme-content" class="readme-content">
+            <div class="readme-loading" data-i18n="projectDetail.loadingReadme">正在加载文档...</div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- 灯箱组件 - 需求 4.2, 4.3, 4.4 -->
+  <div id="lightbox" class="lightbox" style="display: none;">
+    <button class="lightbox-close" aria-label="关闭" data-i18n-aria="projectDetail.lightboxClose">×</button>
+    <button class="lightbox-nav lightbox-prev" aria-label="上一张" data-i18n-aria="projectDetail.lightboxPrev">‹</button>
+    <img id="lightbox-image" class="lightbox-image" src="" alt="">
+    <button class="lightbox-nav lightbox-next" aria-label="下一张" data-i18n-aria="projectDetail.lightboxNext">›</button>
+    <div class="lightbox-counter">
+      <span id="lightbox-current">1</span> / <span id="lightbox-total">1</span>
+    </div>
+  </div>
+
+  <!-- Footer 组件 - 复用主站结构 -->
+  <footer id="contact" class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <p class="footer-copyright" data-i18n="footer.copyright">© 2024 版权所有</p>
+        <a id="footer-email" href="mailto:yanxue6886@163.com" class="footer-email" data-i18n="footer.email">联系邮箱</a>
+        <a href="#" class="back-to-top" aria-label="返回顶部" data-i18n-title="footer.backToTop">↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 引入 marked.js 用于 Markdown 渲染 - 需求 2.1 -->
+  <script src="node_modules/marked/lib/marked.umd.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/project-detail.js"></script>
+</body>
+</html>

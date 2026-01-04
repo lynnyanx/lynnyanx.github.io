@@ -15,7 +15,7 @@ const personalInfo = {
   },
   email: 'yanxue6886@163.com',
   social: {
-    github: 'https://github.com/lynnyan',
+    github: 'https://github.com/lynnyanx',
     linkedin: 'https://blog.csdn.net/weixin_45560266',
     twitter: ''
   }
@@ -105,6 +105,110 @@ const projectTypeConfig = {
     zh: '其他', 
     en: 'Other',
     color: 'gray'
+  }
+};
+
+/**
+ * 项目资源映射配置
+ * 需求 2.1, 3.1, 4.1, 5.1: 为详情页提供项目资源路径
+ * @type {Object.<string, ProjectAssets>}
+ */
+const projectAssets = {
+  'ai-vision-platform': {
+    assetsPath: 'Projects/AIVison',
+    readme: {
+      zh: 'README_EN.md',
+      en: 'README_EN.md'
+    },
+    videos: [
+      'Video/1.MainWindow.mp4',
+      'Video/2.Single image inference.mp4',
+      'Video/3.Batch inference.mp4',
+      'Video/4.Object Detection.mp4',
+      'Video/5.Dataset preparation.mp4',
+      'Video/6.Training.mp4'
+    ],
+    screenshots: [
+      'Images/main_window.PNG',
+      'Images/inference_result.PNG',
+      'Images/inference_result_batch.PNG',
+      'Images/inference_result_yolo.PNG',
+      'Images/training_dialog.PNG',
+      'Images/statistics_dashboard.PNG',
+      'Images/camera_preview.PNG',
+      'Images/incremental_learning.PNG',
+      'Images/Code.png'
+    ],
+    architectureDiagram: {
+      type: 'pdf',
+      path: 'ARCHITECTURE.pdf'
+    }
+  },
+  'project-management': {
+    assetsPath: 'Projects/Project Management',
+    readme: {
+      zh: 'README_EN.md',
+      en: 'README_EN.md'
+    },
+    videos: [
+      'Video/1.Quickly View.mp4',
+      'Video/2.Project View.mp4',
+      'Video/3.Task View.mp4',
+      'Video/4.Report View.mp4'
+    ],
+    screenshots: [
+      'Images/MainDashboard.png',
+      'Images/Project.png',
+      'Images/Task.png',
+      'Images/Report.png'
+    ],
+    architectureDiagram: {
+      type: 'image',
+      path: 'ARCHITECTURE_EN.md'
+    }
+  },
+  'iot-system': {
+    assetsPath: 'Projects/IOTsystem',
+    readme: {
+      zh: 'Readme.md',
+      en: 'Readme.md'
+    },
+    videos: [],
+    screenshots: [
+      'Image/Main.png',
+      'Image/IOT Node Dashboard.png',
+      'Image/Equipment Map.png',
+      'Image/Equipment statistic.png',
+      'Image/Equipment status statistic.png',
+      'Image/Sample Chart.png',
+      'Image/OOS web system.png'
+    ],
+    architectureDiagram: null
+  },
+  'sam3-segmentation': {
+    assetsPath: 'Projects/SAM3',
+    readme: null,
+    videos: [
+      'Sam3 -Prompt-based all-in-one segmentation large model.mp4'
+    ],
+    screenshots: [
+      'SAM3-Web Deploy.png'
+    ],
+    architectureDiagram: null
+  },
+  '2.5d-detection': {
+    assetsPath: 'Projects/2.5D Precision detection system',
+    readme: null,
+    videos: [],
+    screenshots: [],
+    architectureDiagram: null
+  },
+  'llm-private-cloud': {
+    assetsPath: null,
+    readme: null,
+    videos: [],
+    screenshots: [],
+    architectureDiagram: null
   }
 };
 
@@ -398,6 +502,7 @@ function renderProjects() {
  * 需求 3.4: 条件渲染缩略图
  * 需求 3.5: 显示项目类型标签
  * 需求 3.6: 支持点击查看更多媒体资源
+ * 需求 1.1: 点击卡片跳转到详情页
  * @param {Object} project - 项目数据
  * @param {string} locale - 当前语言
  * @returns {HTMLElement} - 项目卡片元素
@@ -406,6 +511,19 @@ function createProjectCard(project, locale) {
   const card = document.createElement('article');
   card.className = 'project-card';
   card.setAttribute('data-project-id', project.id);
+  
+  // 添加点击事件跳转到详情页 - 需求 1.1
+  card.style.cursor = 'pointer';
+  card.addEventListener('click', (e) => {
+    // 如果点击的是链接或按钮，不触发卡片跳转
+    if (e.target.closest('a') || e.target.closest('button')) {
+      return;
+    }
+    // 使用 hash 路由传递项目 ID，避免服务器重写 URL 时丢失参数
+    const targetUrl = `./project.html#id=${encodeURIComponent(project.id)}`;
+    console.log('Navigating to:', targetUrl);
+    window.location.href = targetUrl;
+  });
   
   // 条件渲染缩略图 - 需求 3.4
   if (project.thumbnail) {
@@ -498,6 +616,16 @@ function createProjectCard(project, locale) {
     };
     linksDiv.appendChild(mediaBtn);
   }
+  
+  // 查看项目详情按钮 - 明确的跳转提示
+  const detailBtn = document.createElement('a');
+  detailBtn.href = `./project.html#id=${encodeURIComponent(project.id)}`;
+  detailBtn.className = 'project-detail-link';
+  detailBtn.textContent = locale === 'zh' ? '→ 查看完整项目' : '→ View Full Project';
+  detailBtn.onclick = (e) => {
+    e.stopPropagation();
+  };
+  linksDiv.appendChild(detailBtn);
   
   content.appendChild(linksDiv);
   card.appendChild(content);
@@ -831,12 +959,32 @@ function hasMediaResources(project) {
   );
 }
 
+/**
+ * 获取项目资源配置
+ * 需求 2.1, 3.1, 4.1, 5.1: 根据项目 ID 获取资源配置
+ * @param {string} projectId - 项目 ID
+ * @returns {Object|null} - 项目资源配置或 null
+ */
+function getProjectAssets(projectId) {
+  return projectAssets[projectId] || null;
+}
+
+/**
+ * 获取项目数据
+ * @param {string} projectId - 项目 ID
+ * @returns {Object|null} - 项目数据或 null
+ */
+function getProjectById(projectId) {
+  return projects.find(p => p.id === projectId) || null;
+}
+
 // Export for testing (Node.js environment)
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     personalInfo,
     skills,
     projects,
+    projectAssets,
     projectTypeConfig,
     initApp,
     groupSkillsByCategory,
@@ -846,6 +994,8 @@ if (typeof module !== 'undefined' && module.exports) {
     updateDynamicContent,
     hasMediaResources,
     openMediaModal,
-    closeMediaModal
+    closeMediaModal,
+    getProjectAssets,
+    getProjectById
   };
 }

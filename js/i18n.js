@@ -181,6 +181,24 @@ const i18n = {
       }
     });
     
+    // 更新带有 data-i18n-aria 属性的元素的 aria-label
+    const ariaElements = document.querySelectorAll('[data-i18n-aria]');
+    ariaElements.forEach(el => {
+      const key = el.getAttribute('data-i18n-aria');
+      if (key) {
+        el.setAttribute('aria-label', this.t(key));
+      }
+    });
+    
+    // 更新带有 data-i18n-title 属性的元素的 title
+    const titleElements = document.querySelectorAll('[data-i18n-title]');
+    titleElements.forEach(el => {
+      const key = el.getAttribute('data-i18n-title');
+      if (key) {
+        el.setAttribute('title', this.t(key));
+      }
+    });
+    
     // 更新 html lang 属性
     document.documentElement.lang = this.currentLocale;
   }

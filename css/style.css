@@ -255,9 +255,37 @@ p {
 
 .hero-bio {
   max-width: 600px;
-  margin: 0 auto var(--spacing-xl);
+  margin: 0 auto var(--spacing-lg);
   color: var(--text-secondary);
   line-height: 1.8;
+}
+
+/* 下载简历按钮 */
+.download-resume-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-xl);
+  background: var(--primary-color);
+  color: var(--text-inverse);
+  border-radius: var(--radius-full);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+  margin-bottom: var(--spacing-xl);
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-md);
+}
+
+.download-resume-btn:hover {
+  background: var(--primary-dark);
+  color: var(--text-inverse);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.download-resume-btn .download-icon {
+  font-size: 1.125rem;
 }
 
 .social-links {
@@ -529,6 +557,14 @@ p {
   color: var(--text-light);
 }
 
+.footer-contact {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .footer-email {
   color: var(--primary-color);
   font-size: 0.875rem;
@@ -536,6 +572,17 @@ p {
 
 .footer-email:hover {
   color: var(--primary-dark);
+}
+
+.contact-divider {
+  color: var(--text-light);
+  font-size: 0.875rem;
+}
+
+.footer-phone,
+.footer-wechat {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
 }
 
 .back-to-top {
@@ -872,7 +919,7 @@ button,
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   z-index: 2000;
@@ -1094,6 +1141,26 @@ button,
   color: var(--text-inverse);
 }
 
+/* 项目详情链接按钮 */
+.project-detail-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--primary-color);
+  color: var(--text-inverse);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.project-detail-link:hover {
+  background: var(--primary-dark, #4338ca);
+  transform: translateX(4px);
+}
+
 /* Responsive adjustments for modal */
 @media (max-width: 768px) {
   .media-modal {
@@ -1129,4 +1196,1346 @@ button,
 
 .bg-secondary {
   background-color: var(--bg-secondary);
+}
+
+
+/* ============================================
+   Project Detail Page Styles
+   需求: 1.2, 1.3, 1.4, 7.1, 7.2
+   ============================================ */
+
+/* Main content area - account for fixed header */
+.project-detail-main {
+  padding-top: 60px;
+  min-height: 100vh;
+}
+
+/* ============================================
+   Breadcrumb Navigation - 面包屑导航
+   需求: 1.2, 1.3
+   ============================================ */
+.breadcrumb {
+  padding: var(--spacing-md) 0;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.breadcrumb .container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: 0.875rem;
+}
+
+.breadcrumb a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.breadcrumb a:hover {
+  color: var(--primary-color);
+}
+
+.breadcrumb-separator {
+  color: var(--text-light);
+  font-size: 0.75rem;
+}
+
+.breadcrumb-current {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* ============================================
+   Loading and Error States - Enhanced
+   需求: 1.1, 11.1, 11.2
+   ============================================ */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: var(--spacing-md);
+  background: var(--bg-primary);
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-2xl);
+}
+
+.loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid var(--border-color);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.loading-text {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.loading-progress {
+  width: 200px;
+  height: 4px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.loading-progress-bar {
+  width: 30%;
+  height: 100%;
+  background: var(--primary-color);
+  border-radius: var(--radius-full);
+  animation: loadingProgress 1.5s ease-in-out infinite;
+}
+
+@keyframes loadingProgress {
+  0% {
+    width: 0%;
+    margin-left: 0%;
+  }
+  50% {
+    width: 60%;
+    margin-left: 20%;
+  }
+  100% {
+    width: 0%;
+    margin-left: 100%;
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: var(--spacing-lg);
+  text-align: center;
+  background: var(--bg-primary);
+  padding: var(--spacing-2xl);
+}
+
+.error-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+  max-width: 400px;
+}
+
+.error-icon {
+  font-size: 4rem;
+  opacity: 0.8;
+  margin-bottom: var(--spacing-sm);
+}
+
+.error-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.error-message {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background: var(--primary-color);
+  color: var(--text-inverse);
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  transition: background var(--transition-fast);
+}
+
+.btn-back:hover {
+  background: var(--primary-dark);
+  color: var(--text-inverse);
+}
+
+/* ============================================
+   Project Header - 项目头部
+   需求: 1.4
+   ============================================ */
+.project-header {
+  padding: var(--spacing-2xl) 0;
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.project-header-content {
+  max-width: 800px;
+}
+
+.project-detail-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+  line-height: 1.3;
+}
+
+.project-detail-description {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: var(--spacing-lg);
+}
+
+.project-detail-tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+}
+
+.project-detail-tech-stack .tech-tag {
+  padding: var(--spacing-xs) var(--spacing-md);
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  border: 1px solid var(--border-color);
+}
+
+.project-detail-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.btn-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+}
+
+.btn-github {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-github:hover {
+  background: var(--text-primary);
+  color: var(--text-inverse);
+  border-color: var(--text-primary);
+}
+
+.btn-demo {
+  background: var(--primary-color);
+  color: var(--text-inverse);
+}
+
+.btn-demo:hover {
+  background: var(--primary-dark);
+  color: var(--text-inverse);
+}
+
+/* Project type tag in header */
+.project-header .project-type-tag {
+  margin-bottom: var(--spacing-md);
+}
+
+/* ============================================
+   Project Sections - 项目内容区域
+   ============================================ */
+.project-content-wrapper {
+  background: var(--bg-secondary);
+}
+
+.project-section {
+  padding: var(--spacing-2xl) 0;
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.project-section:last-child {
+  border-bottom: none;
+}
+
+.project-section .section-title {
+  text-align: left;
+  font-size: 1.25rem;
+  margin-bottom: var(--spacing-lg);
+}
+
+.project-section .section-title::after {
+  display: none;
+}
+
+/* ============================================
+   Responsive - Project Detail Page
+   需求: 7.1, 7.2
+   ============================================ */
+@media (max-width: 767px) {
+  .project-detail-main {
+    padding-top: 56px;
+  }
+  
+  .breadcrumb .container {
+    font-size: 0.8125rem;
+  }
+  
+  .project-header {
+    padding: var(--spacing-xl) 0;
+  }
+  
+  .project-detail-title {
+    font-size: 1.5rem;
+  }
+  
+  .project-detail-description {
+    font-size: 0.9375rem;
+  }
+  
+  .project-detail-links {
+    flex-direction: column;
+  }
+  
+  .btn-link {
+    justify-content: center;
+  }
+  
+  .project-section {
+    padding: var(--spacing-xl) 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .project-detail-title {
+    font-size: 2.25rem;
+  }
+  
+  .project-header-content {
+    max-width: 900px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .project-detail-title {
+    font-size: 2.5rem;
+  }
+}
+
+
+/* ============================================
+   README Content Styles
+   需求: 2.1, 2.2, 2.3, 2.4
+   ============================================ */
+
+/* README Section */
+.readme-section {
+  background: var(--bg-primary);
+}
+
+.readme-content {
+  line-height: 1.8;
+  color: var(--text-primary);
+}
+
+/* README Loading State */
+.readme-loading {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  color: var(--text-secondary);
+}
+
+/* README Headings */
+.readme-content h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-top: var(--spacing-2xl);
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 2px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.readme-content h1:first-child {
+  margin-top: 0;
+}
+
+.readme-content h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-xs);
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-primary);
+}
+
+.readme-content h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: var(--spacing-lg);
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-primary);
+}
+
+.readme-content h4,
+.readme-content h5,
+.readme-content h6 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-primary);
+}
+
+/* README Paragraphs */
+.readme-content p {
+  margin-bottom: var(--spacing-md);
+  color: var(--text-secondary);
+}
+
+/* README Lists */
+.readme-content ul,
+.readme-content ol {
+  margin-bottom: var(--spacing-md);
+  padding-left: var(--spacing-xl);
+}
+
+.readme-content ul {
+  list-style-type: disc;
+}
+
+.readme-content ol {
+  list-style-type: decimal;
+}
+
+.readme-content li {
+  margin-bottom: var(--spacing-xs);
+  color: var(--text-secondary);
+}
+
+.readme-content li > ul,
+.readme-content li > ol {
+  margin-top: var(--spacing-xs);
+  margin-bottom: 0;
+}
+
+/* README Links */
+.readme-content a {
+  color: var(--primary-color);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--transition-fast);
+}
+
+.readme-content a:hover {
+  border-bottom-color: var(--primary-color);
+}
+
+/* README Images */
+.readme-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  margin: var(--spacing-md) 0;
+  box-shadow: var(--shadow-sm);
+}
+
+/* README Blockquotes */
+.readme-content blockquote {
+  margin: var(--spacing-md) 0;
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-left: 4px solid var(--primary-color);
+  background: var(--bg-secondary);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  color: var(--text-secondary);
+}
+
+.readme-content blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* README Tables - 需求 2.2 */
+.readme-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--spacing-md) 0;
+  font-size: 0.875rem;
+}
+
+.readme-content th,
+.readme-content td {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--border-color);
+  text-align: left;
+}
+
+.readme-content th {
+  background: var(--bg-secondary);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.readme-content td {
+  color: var(--text-secondary);
+}
+
+.readme-content tr:nth-child(even) td {
+  background: var(--bg-secondary);
+}
+
+/* README Horizontal Rule */
+.readme-content hr {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: var(--spacing-xl) 0;
+}
+
+/* ============================================
+   Code Block Styles - 语法高亮
+   需求: 2.3
+   ============================================ */
+
+/* Inline Code */
+.readme-content code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  padding: 0.2em 0.4em;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-sm);
+  color: #e83e8c;
+}
+
+/* Code Blocks */
+.readme-content pre {
+  margin: var(--spacing-md) 0;
+  padding: var(--spacing-lg);
+  background: #1e293b;
+  border-radius: var(--radius-lg);
+  overflow-x: auto;
+  line-height: 1.6;
+}
+
+.readme-content pre code {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  color: #e2e8f0;
+  display: block;
+  white-space: pre;
+}
+
+/* Code Block Scrollbar */
+.readme-content pre::-webkit-scrollbar {
+  height: 8px;
+}
+
+.readme-content pre::-webkit-scrollbar-track {
+  background: #334155;
+  border-radius: 4px;
+}
+
+.readme-content pre::-webkit-scrollbar-thumb {
+  background: #64748b;
+  border-radius: 4px;
+}
+
+.readme-content pre::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Syntax Highlighting Colors (Basic) */
+.readme-content pre .keyword {
+  color: #c792ea;
+}
+
+.readme-content pre .string {
+  color: #c3e88d;
+}
+
+.readme-content pre .comment {
+  color: #676e95;
+  font-style: italic;
+}
+
+.readme-content pre .number {
+  color: #f78c6c;
+}
+
+.readme-content pre .function {
+  color: #82aaff;
+}
+
+.readme-content pre .operator {
+  color: #89ddff;
+}
+
+/* ============================================
+   README Fallback Styles
+   需求: 2.4
+   ============================================ */
+
+.readme-fallback {
+  padding: var(--spacing-lg);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+}
+
+.readme-fallback-notice {
+  text-align: center;
+  color: var(--text-light);
+  font-style: italic;
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.readme-fallback-description,
+.readme-fallback-highlights,
+.readme-fallback-tech {
+  margin-bottom: var(--spacing-lg);
+}
+
+.readme-fallback-description:last-child,
+.readme-fallback-highlights:last-child,
+.readme-fallback-tech:last-child {
+  margin-bottom: 0;
+}
+
+.readme-fallback h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.readme-fallback p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.readme-fallback ul {
+  list-style-type: disc;
+  padding-left: var(--spacing-lg);
+}
+
+.readme-fallback li {
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.readme-fallback .tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.readme-fallback .tech-tag {
+  padding: var(--spacing-xs) var(--spacing-md);
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+
+/* ============================================
+   README Responsive Styles
+   需求: 7.1, 7.2
+   ============================================ */
+
+@media (max-width: 767px) {
+  .readme-content h1 {
+    font-size: 1.5rem;
+  }
+  
+  .readme-content h2 {
+    font-size: 1.25rem;
+  }
+  
+  .readme-content h3 {
+    font-size: 1.125rem;
+  }
+  
+  .readme-content pre {
+    padding: var(--spacing-md);
+    font-size: 0.8125rem;
+  }
+  
+  .readme-content table {
+    font-size: 0.8125rem;
+  }
+  
+  .readme-content th,
+  .readme-content td {
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+  
+  .readme-fallback {
+    padding: var(--spacing-md);
+  }
+}
+
+
+/* ============================================
+   Video Player Styles
+   需求: 3.1, 3.2, 3.3, 3.4
+   ============================================ */
+
+/* Video Section Layout */
+.video-section {
+  background: var(--bg-primary);
+}
+
+.video-content {
+  display: flex;
+  gap: var(--spacing-lg);
+  align-items: flex-start;
+}
+
+/* Video Player Wrapper */
+.video-player-wrapper {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  background: #000;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+/* HTML5 Video Player - 需求 3.1, 3.2 */
+.video-player {
+  width: 100%;
+  max-height: 500px;
+  display: block;
+  background: #000;
+}
+
+/* Video Error State - 需求 3.4 */
+.video-error {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.9);
+  color: var(--text-inverse);
+  gap: var(--spacing-md);
+}
+
+.video-error p {
+  color: var(--text-inverse);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.video-error-icon {
+  font-size: 3rem;
+  opacity: 0.7;
+}
+
+.video-retry-btn {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background: var(--primary-color);
+  color: var(--text-inverse);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background var(--transition-fast);
+}
+
+.video-retry-btn:hover {
+  background: var(--primary-dark);
+}
+
+/* Video List - 需求 3.3 */
+.video-list {
+  width: 280px;
+  flex-shrink: 0;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+  border: 1px solid var(--border-color);
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.video-list-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.video-list-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.video-list-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  background: var(--bg-primary);
+  border: 1px solid transparent;
+}
+
+.video-list-item:hover {
+  background: var(--bg-tertiary);
+  border-color: var(--border-color);
+}
+
+.video-list-item.active {
+  background: rgba(37, 99, 235, 0.1);
+  border-color: var(--primary-color);
+}
+
+.video-list-item.active .video-item-icon {
+  color: var(--primary-color);
+}
+
+.video-list-item.active .video-item-title {
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.video-item-icon {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  flex-shrink: 0;
+}
+
+.video-item-title {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* Video List Scrollbar */
+.video-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.video-list::-webkit-scrollbar-track {
+  background: var(--bg-tertiary);
+  border-radius: 3px;
+}
+
+.video-list::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+.video-list::-webkit-scrollbar-thumb:hover {
+  background: var(--text-light);
+}
+
+/* ============================================
+   Video Player Responsive Styles
+   需求: 7.1, 7.2
+   ============================================ */
+
+@media (max-width: 767px) {
+  .video-content {
+    flex-direction: column;
+  }
+  
+  .video-player-wrapper {
+    width: 100%;
+  }
+  
+  .video-player {
+    max-height: 300px;
+  }
+  
+  .video-list {
+    width: 100%;
+    max-height: 200px;
+  }
+  
+  .video-list-item {
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+  
+  .video-item-title {
+    font-size: 0.75rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .video-list {
+    width: 240px;
+  }
+}
+
+
+/* ============================================
+   Screenshot Gallery Styles
+   需求: 4.1, 4.2, 4.3, 4.4
+   ============================================ */
+
+/* Gallery Section */
+.gallery-section {
+  background: var(--bg-primary);
+}
+
+/* Gallery Grid - 需求 4.1 */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--spacing-md);
+}
+
+/* Gallery Item */
+.gallery-item {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.gallery-item:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-md);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+/* Gallery Item Error State */
+.gallery-item-error {
+  background: var(--bg-secondary);
+}
+
+.gallery-item-error img {
+  object-fit: contain;
+}
+
+/* ============================================
+   Lightbox Styles
+   需求: 4.2, 4.3, 4.4
+   ============================================ */
+
+/* Lightbox Overlay */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: var(--spacing-lg);
+}
+
+/* Lightbox Image */
+.lightbox-image {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Lightbox Close Button - 需求 4.4 */
+.lightbox-close {
+  position: absolute;
+  top: var(--spacing-lg);
+  right: var(--spacing-lg);
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-inverse);
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  transition: background var(--transition-fast);
+  z-index: 10;
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Lightbox Navigation - 需求 4.3 */
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-inverse);
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  transition: background var(--transition-fast);
+  z-index: 10;
+}
+
+.lightbox-nav:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.lightbox-prev {
+  left: var(--spacing-lg);
+}
+
+.lightbox-next {
+  right: var(--spacing-lg);
+}
+
+/* Lightbox Counter */
+.lightbox-counter {
+  position: absolute;
+  bottom: var(--spacing-lg);
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--text-inverse);
+  font-size: 0.875rem;
+  background: rgba(0, 0, 0, 0.5);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-full);
+}
+
+/* ============================================
+   Gallery Responsive Styles
+   需求: 7.1, 7.2
+   ============================================ */
+
+@media (max-width: 767px) {
+  /* 需求 7.2: 屏幕宽度小于 768px 时改为单列布局 */
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
+  }
+  
+  .gallery-item {
+    aspect-ratio: 4 / 3;
+  }
+  
+  /* Lightbox mobile adjustments */
+  .lightbox {
+    padding: var(--spacing-md);
+  }
+  
+  .lightbox-image {
+    max-width: 95vw;
+    max-height: 80vh;
+  }
+  
+  .lightbox-close {
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+  }
+  
+  .lightbox-nav {
+    width: 44px;
+    height: 44px;
+    font-size: 1.5rem;
+  }
+  
+  .lightbox-prev {
+    left: var(--spacing-sm);
+  }
+  
+  .lightbox-next {
+    right: var(--spacing-sm);
+  }
+  
+  .lightbox-counter {
+    bottom: var(--spacing-md);
+    font-size: 0.75rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .gallery-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Touch support for mobile - 需求 7.3 */
+@media (hover: none) and (pointer: coarse) {
+  .gallery-item:hover {
+    transform: none;
+  }
+  
+  .gallery-item:active {
+    transform: scale(0.98);
+  }
+  
+  .lightbox-nav:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .lightbox-nav:active {
+    background: rgba(255, 255, 255, 0.3);
+  }
+}
+
+
+/* ============================================
+   Architecture Diagram Styles
+   需求: 5.1, 5.2, 5.3
+   ============================================ */
+
+/* Architecture Section */
+.architecture-section {
+  background: var(--bg-primary);
+}
+
+.architecture-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* PDF Architecture - 需求 5.2 */
+.architecture-pdf {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-2xl);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  text-align: center;
+}
+
+.architecture-pdf-icon {
+  font-size: 4rem;
+  margin-bottom: var(--spacing-md);
+  opacity: 0.8;
+}
+
+.architecture-pdf-desc {
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-lg);
+  font-size: 0.9375rem;
+}
+
+.architecture-pdf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  justify-content: center;
+}
+
+/* Image Architecture - 需求 5.3 */
+.architecture-image {
+  display: flex;
+  justify-content: center;
+}
+
+.architecture-image-wrapper {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.architecture-image-wrapper:hover {
+  transform: scale(1.01);
+  box-shadow: var(--shadow-lg);
+}
+
+.architecture-img {
+  display: block;
+  max-width: 100%;
+  max-height: 600px;
+  object-fit: contain;
+}
+
+.architecture-image-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--spacing-md);
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  color: var(--text-inverse);
+  font-size: 0.875rem;
+  text-align: center;
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.architecture-image-wrapper:hover .architecture-image-overlay {
+  opacity: 1;
+}
+
+/* Architecture Error State */
+.architecture-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-2xl);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  text-align: center;
+}
+
+.architecture-error-icon {
+  font-size: 3rem;
+  margin-bottom: var(--spacing-md);
+  opacity: 0.6;
+}
+
+.architecture-error p {
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Architecture Responsive Styles */
+@media (max-width: 767px) {
+  .architecture-pdf {
+    padding: var(--spacing-lg);
+  }
+  
+  .architecture-pdf-icon {
+    font-size: 3rem;
+  }
+  
+  .architecture-pdf-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .architecture-pdf-actions .btn-link {
+    justify-content: center;
+  }
+  
+  .architecture-img {
+    max-height: 400px;
+  }
+}
+
+
+/* ============================================
+   Lazy Loading Styles
+   需求: 11.3 - 图片懒加载优化
+   ============================================ */
+
+/* Lazy image placeholder */
+.lazy-image {
+  opacity: 0.6;
+  transition: opacity var(--transition-normal);
+  background: var(--bg-tertiary);
+}
+
+/* Lazy image loaded state */
+.lazy-image.lazy-loaded {
+  opacity: 1;
+}
+
+/* Loading shimmer effect for lazy images */
+.gallery-item .lazy-image:not(.lazy-loaded) {
+  animation: shimmer 1.5s infinite;
+  background: linear-gradient(
+    90deg,
+    var(--bg-tertiary) 0%,
+    var(--bg-secondary) 50%,
+    var(--bg-tertiary) 100%
+  );
+  background-size: 200% 100%;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Ensure smooth transition when image loads */
+.gallery-item img {
+  will-change: opacity;
 }
