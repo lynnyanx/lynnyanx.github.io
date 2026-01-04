@@ -67,11 +67,16 @@ const i18n = {
   async loadTranslations(locale) {
     // 浏览器环境：通过 fetch 加载
     if (typeof fetch !== 'undefined' && typeof window !== 'undefined') {
-      const response = await fetch(`locales/${locale}.json`);
+      // 使用相对路径，让浏览器自动处理
+      const url = `./locales/${locale}.json`;
+      console.log('Loading translations from:', url, 'Current locale:', this.currentLocale, 'New locale:', locale);
+      
+      const response = await fetch(url);
       if (!response.ok) {
         throw new Error(`Failed to load ${locale}.json`);
       }
       this.translations = await response.json();
+      console.log('Translations loaded successfully:', Object.keys(this.translations));
     } else {
       // Node.js 环境：直接 require（用于测试）
       try {
