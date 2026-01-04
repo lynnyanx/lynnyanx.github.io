@@ -9,7 +9,7 @@
   "hero": {
     "greeting": "Hello, I'm",
     "name": "Lynn Yan",
-    "title": "Machine Vision Algorithm Engineer",
+    "title": "Software Manager / AI Direction",
     "bio": "Over 3 years of experience in machine vision and industrial IoT. Full-stack capabilities spanning algorithm R&D (Python), engineering deployment (C#), and edge deployment (C++). Expert in SOTA vision models (PatchCore, YOLO) and 2.5D vision technology, specializing in industrial deployment optimization via ONNX Runtime."
   },
   "skills": {
