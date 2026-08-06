@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="个人作品集网站 - 展示技能和项目作品">
   <title data-i18n="nav.home">作品集</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=20260805">
 </head>
 <body>
   <!-- Header 组件 - 需求 7.2 -->
@@ -30,9 +30,19 @@
     <section id="hero" class="hero section">
       <div class="container">
         <div class="hero-content">
-          <img id="hero-avatar" src="assets/images/avatar.png" alt="头像" class="hero-avatar" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Ccircle cx=%22100%22 cy=%22100%22 r=%22100%22 fill=%22%23e2e8f0%22/%3E%3Ctext x=%22100%22 y=%22115%22 text-anchor=%22middle%22 font-size=%2260%22 fill=%22%2394a3b8%22%3E👤%3C/text%3E%3C/svg%3E'">
+          <div class="avatar-frame">
+            <img id="hero-avatar" src="assets/images/avatar.png" alt="头像" class="hero-avatar" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Ccircle cx=%22100%22 cy=%22100%22 r=%22100%22 fill=%22%23e2e8f0%22/%3E%3Ctext x=%22100%22 y=%22115%22 text-anchor=%22middle%22 font-size=%2260%22 fill=%22%2394a3b8%22%3E👤%3C/text%3E%3C/svg%3E'">
+            <div class="detect-box" aria-hidden="true">
+              <span class="detect-corner tl"></span>
+              <span class="detect-corner tr"></span>
+              <span class="detect-corner bl"></span>
+              <span class="detect-corner br"></span>
+              <span class="detect-scan"></span>
+              <span class="detect-label">vision_engineer 0.99</span>
+            </div>
+          </div>
           <h1 id="hero-name" class="hero-name" data-i18n="hero.name">严雪</h1>
-          <p id="hero-title" class="hero-title" data-i18n="hero.title">机器视觉算法工程师</p>
+          <p id="hero-title" class="hero-title">机器视觉算法工程师</p>
           <p id="hero-bio" class="hero-bio" data-i18n="hero.bio">拥有 3 年+ 机器视觉与工业物联网实战经验，具备"算法研发(Python) + 工程落地(C#) + 边缘部署(C++)"的完整技术闭环能力。精通 SOTA 视觉模型（PatchCore、YOLO）及 2.5D 视觉技术，擅长通过模型量化及 ONNX Runtime 技术解决工业现场落地痛点。</p>
           <!-- 下载简历按钮 -->
           <a href="Lynncs.pdf" download class="download-resume-btn" data-i18n="hero.downloadResume">
@@ -85,7 +95,8 @@
     </div>
   </footer>
 
-  <script src="js/i18n.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/i18n.js?v=20260805"></script>
+  <script src="js/main.js?v=20260805"></script>
+  <script src="js/effects.js?v=20260805"></script>
 </body>
 </html>
