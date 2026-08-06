@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="项目详情 - 作品集网站">
   <title data-i18n="projectDetail.pageTitle">项目详情</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=20260805">
 </head>
 <body>
   <!-- Header 组件 - 复用主站结构 -->
@@ -71,6 +71,11 @@
             <div id="project-links" class="project-detail-links"></div>
           </div>
         </div>
+      </section>
+
+      <!-- 技术深度区域 - 指标 / 架构决策 / 挑战与方案 -->
+      <section id="technical-section" class="project-section technical-section" style="display: none;">
+        <div id="technical-content" class="container"></div>
       </section>
 
       <!-- 视频区域 - 需求 3.1, 3.2, 3.3, 3.4 -->
@@ -146,8 +151,9 @@
 
   <!-- 引入 marked.js 用于 Markdown 渲染 - 需求 2.1 -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="js/i18n.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/project-detail.js"></script>
+  <script src="js/i18n.js?v=20260805"></script>
+  <script src="js/main.js?v=20260805"></script>
+  <script src="js/project-detail.js?v=20260805"></script>
+  <script src="js/effects.js?v=20260805"></script>
 </body>
 </html>

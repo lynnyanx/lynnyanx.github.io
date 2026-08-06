@@ -1,10 +1,6 @@
 # 🔍 AI Vision Inspector
 
 <p align="center">
-  <img src="docs/images/logo.png" alt="AI Vision Inspector Logo" width="200"/>
-</p>
-
-<p align="center">
   <strong>Deep Learning-Based Industrial Vision Inspection Platform</strong>
 </p>
 
@@ -263,9 +259,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📧 Contact
 
-- **Author**: [Your Name]
-- **Email**: [your.email@example.com]
-- **LinkedIn**: [Your LinkedIn Profile]
+- **Author**: Lynn Yan
+- **Email**: yanxue6886@163.com
+- **Blog**: [CSDN](https://blog.csdn.net/weixin_45560266)
 
 ---
 

@@ -437,6 +437,101 @@ const projectDetail = {
   },
 
   /**
+   * 渲染技术深度区域：关键指标 / 架构与技术决策 / 挑战与解决方案
+   * @param {Object} project - 项目数据（含 technical 字段）
+   */
+  renderTechnicalSection(project) {
+    const section = document.getElementById('technical-section');
+    const container = document.getElementById('technical-content');
+    if (!section || !container) return;
+
+    const tech = project && project.technical;
+    if (!tech) {
+      section.style.display = 'none';
+      return;
+    }
+
+    const locale = typeof i18n !== 'undefined' ? i18n.currentLocale : 'zh';
+    const t = obj => (obj && (obj[locale] || obj.zh)) || '';
+    let html = '';
+
+    // 关键指标
+    if (tech.metrics && tech.metrics.length > 0) {
+      html += `<div class="tech-metrics">${tech.metrics.map(m => `
+        <div class="tech-metric">
+          <span class="tech-metric-value" data-value="${m.value}">${m.value}</span>
+          <span class="tech-metric-label">${t(m.label)}</span>
+        </div>`).join('')}</div>`;
+    }
+
+    // 架构与技术决策
+    if (tech.architecture && tech.architecture.length > 0) {
+      html += `<h2 class="section-title">🏗️ ${locale === 'zh' ? '架构与技术决策' : 'Architecture & Decisions'}</h2>
+        <div class="tech-arch-grid">${tech.architecture.map(a => `
+          <div class="tech-arch-item">
+            <h3 class="tech-arch-name">${t(a.name)}</h3>
+            <p class="tech-arch-desc">${t(a.desc)}</p>
+          </div>`).join('')}</div>`;
+    }
+
+    // 技术挑战与解决方案
+    if (tech.challenges && tech.challenges.length > 0) {
+      html += `<h2 class="section-title">⚡ ${locale === 'zh' ? '技术挑战与解决方案' : 'Challenges & Solutions'}</h2>
+        <div class="tech-challenges">${tech.challenges.map(c => `
+          <div class="tech-challenge">
+            <div class="tech-problem">
+              <span class="tech-badge">${locale === 'zh' ? '挑战' : 'Challenge'}</span>
+              <p>${t(c.problem)}</p>
+            </div>
+            <div class="tech-arrow" aria-hidden="true">→</div>
+            <div class="tech-solution">
+              <span class="tech-badge">${locale === 'zh' ? '方案' : 'Solution'}</span>
+              <p>${t(c.solution)}</p>
+            </div>
+          </div>`).join('')}</div>`;
+    }
+
+    container.innerHTML = html;
+    section.style.display = html ? 'block' : 'none';
+    if (html) this.animateMetrics(container);
+  },
+
+  /**
+   * 指标数字滚动动画（进入视口时触发，遵循 prefers-reduced-motion）
+   * @param {HTMLElement} root - 指标所在容器
+   */
+  animateMetrics(root) {
+    if (
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      !('IntersectionObserver' in window)
+    ) return;
+
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        io.unobserve(entry.target);
+        const el = entry.target;
+        // 解析 "<50ms" / "100x" / "9GB" 等格式：前缀 + 数字 + 后缀
+        const match = /^([^0-9]*)([\d.]+)(.*)$/.exec(el.dataset.value || '');
+        if (!match) return;
+        const target = parseFloat(match[2]);
+        const decimals = (match[2].split('.')[1] || '').length;
+        const duration = 900;
+        const start = performance.now();
+        const step = now => {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = match[1] + (target * eased).toFixed(decimals) + match[3];
+          if (progress < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      });
+    }, { threshold: 0.4 });
+
+    root.querySelectorAll('.tech-metric-value').forEach(el => io.observe(el));
+  },
+
+  /**
    * 页面初始化
    * 需求 1.1: 初始化详情页
    * 需求 11.2: 无效项目 ID 显示错误提示
@@ -476,6 +571,7 @@ const projectDetail = {
     // 渲染页面内容
     this.renderBreadcrumb(project);
     this.renderProjectHeader(project);
+    this.renderTechnicalSection(project);
     
     // 更新页面标题
     const locale = typeof i18n !== 'undefined' ? i18n.currentLocale : 'zh';
@@ -731,7 +827,8 @@ const projectDetail = {
     if (this.currentProject) {
       this.renderBreadcrumb(this.currentProject);
       this.renderProjectHeader(this.currentProject);
-      
+      this.renderTechnicalSection(this.currentProject);
+
       // 更新页面标题
       const locale = typeof i18n !== 'undefined' ? i18n.currentLocale : 'zh';
       document.title = `${this.currentProject.title[locale] || this.currentProject.title.zh} - ${locale === 'zh' ? '作品集' : 'Portfolio'}`;
