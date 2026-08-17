@@ -170,6 +170,29 @@ const projectAssets = {
     ],
     architectureDiagram: null
   },
+  'crimping-defect-inspection': {
+    assetsPath: 'Projects/CrimpingInspection',
+    readme: {
+      zh: 'README_ZH.md',
+      en: 'README_EN.md'
+    },
+    videos: [
+      'Video/1.App Live Inspection.mp4',
+      'Video/2.Detection Examples.mp4'
+    ],
+    hoverPreview: 'Video/1.App Live Inspection.mp4',
+    screenshots: [
+      'Images/app_ui_workstation.jpg',
+      'Images/detections_mixed_grid.jpg',
+      'Images/detections_defects_grid.jpg',
+      'Images/gradcam_core_wire_bent_back.jpg',
+      'Images/occlusion_sensitivity.jpg',
+      'Images/confusion_matrix_normalized.png',
+      'Images/pr_curve.png',
+      'Images/recall_curve.png'
+    ],
+    architectureDiagram: null
+  },
   'project-management': {
     assetsPath: 'Projects/Project Management',
     readme: {
@@ -485,6 +508,139 @@ const projects = [
           solution: {
             zh: '改为人机协同：AI 负责过滤良品，边缘件转人工复检；判定策略上优先保证不漏检、接受一定过杀，让检验员把精力从全检转向缺陷确认。',
             en: 'Shifted to human-AI collaboration: AI filters the good parts and routes borderline ones to manual re-inspection, with a policy that prioritizes never missing a defect over avoiding over-kill — moving inspectors from full inspection to defect confirmation.'
+          }
+        }
+      ]
+    }
+  },
+  {
+    id: 'crimping-defect-inspection',
+    type: 'ai-vision',
+    title: {
+      zh: '端子压接缺陷 AI 视觉检测系统',
+      en: 'Wire Crimping Defect AI Inspection'
+    },
+    description: {
+      zh: '深圳产线的端子压接外观缺陷检测系统：Basler 工业相机采图，YOLO11m-OBB 旋转框模型检测 14 类压接缺陷，TensorRT 加速推理，Tkinter 产线工作站内建人工确认与数据回流闭环。接手时基线模型漏检率 64.4%，通过根因分析（标签-架构错配、类别失衡、分辨率不足）与产线数据闭环微调，交付验收实测（8,224 张 / 2,060 个样品，训练截止后采集）样品级 NG 检出率 99.6%、整体准确率 99.6%、过杀率 0.15%，全面超过客户 ≥95% 的验收要求。',
+      en: 'A wire crimping defect inspection system on the Shenzhen production line: Basler industrial camera acquisition, a YOLO11m-OBB rotated-box model detecting 14 crimping defect classes, TensorRT-accelerated inference, and a Tkinter line workstation with built-in operator confirmation and a data feedback loop. The inherited baseline missed 64.4% of defects; root-cause analysis (label–architecture mismatch, class imbalance, insufficient resolution) plus closed-loop fine-tuning on production data brought the acceptance run (8,224 images / 2,060 samples, collected after the training cutoff) to 99.6% sample-level NG recall and 99.6% overall accuracy at a 0.15% false-alarm rate — clearing the customer\'s ≥95% acceptance bar on every measure.'
+    },
+    thumbnail: 'Projects/CrimpingInspection/Images/app_ui_workstation.jpg',
+    media: {
+      screenshots: [
+        'Projects/CrimpingInspection/Images/app_ui_workstation.jpg',
+        'Projects/CrimpingInspection/Images/detections_mixed_grid.jpg',
+        'Projects/CrimpingInspection/Images/detections_defects_grid.jpg',
+        'Projects/CrimpingInspection/Images/gradcam_core_wire_bent_back.jpg',
+        'Projects/CrimpingInspection/Images/occlusion_sensitivity.jpg',
+        'Projects/CrimpingInspection/Images/confusion_matrix_normalized.png',
+        'Projects/CrimpingInspection/Images/pr_curve.png',
+        'Projects/CrimpingInspection/Images/recall_curve.png'
+      ],
+      gif: '',
+      architectureDiagram: ''
+    },
+    techStack: ['Python 3.12', 'YOLO11m-OBB', 'TensorRT', 'Basler pypylon', 'Tkinter', 'GradCAM'],
+    links: {
+      demo: '',
+      github: ''
+    },
+    highlights: {
+      zh: ['14 类旋转框缺陷检测', '验收实测 NG 检出率 99.6%', '标签-架构错配根因分析', '三态判定 · 人机协同', '产线数据闭环微调'],
+      en: ['14-class OBB Detection', 'Acceptance NG Recall 99.6%', 'Label–Architecture Root Cause', 'Tri-state Verdict · Human-in-loop', 'Production Data Fine-tune Loop']
+    },
+    technical: {
+      metrics: [
+        { value: '99.6%', label: { zh: '样品级 NG 检出率（2,060 样品验收实测）', en: 'Sample-level NG Recall (2,060-sample acceptance)' } },
+        { value: '99.56%', label: { zh: '整体准确率（8,224 张产线数据）', en: 'Overall Accuracy (8,224 production images)' } },
+        { value: '0.15%', label: { zh: '过杀率（每千张约 1.5 张）', en: 'False-alarm Rate (~1.5 per 1,000 images)' } },
+        { value: '0.58→0.99', label: { zh: '良品框 mAP50-95（错配修复后）', en: 'OK-box mAP50-95 (after mismatch fix)' } }
+      ],
+      architecture: [
+        {
+          name: { zh: '采集与推理双线程', en: 'Dual-thread Capture & Inference' },
+          desc: {
+            zh: 'pypylon 采集线程 + 连续推理线程各自独立；缩放流供实时预测，「拍照检测」暂停连续推理、对全分辨率原图单独推理一次并定格结果；推理异常自动 GPU → CPU 降级。',
+            en: 'Independent pypylon capture and continuous-inference threads: a resized stream feeds live prediction, while each capture pauses live inference and runs one full-resolution pass with the result frozen on screen; inference crashes fall back GPU → CPU automatically.'
+          }
+        },
+        {
+          name: { zh: 'OBB 旋转框检测', en: 'OBB Rotated-box Detection' },
+          desc: {
+            zh: 'YOLO11m-OBB @1280 检测 14 类（良品 + 13 缺陷），旋转框贴合端子实际姿态；缺陷优先规则在检出缺陷时隐藏良品框，同一画面不出现矛盾结论；TensorRT engine 加速，自研 build_engine.py 绕过 Ultralytics 在 TensorRT 11 上的导出失效。',
+            en: 'YOLO11m-OBB @1280 detects 14 classes (OK + 13 defects) with rotated boxes fitting the terminal pose; a defect-first rule hides the OK box whenever a defect is found so one frame never shows contradictory verdicts; TensorRT engines are built by a custom build_engine.py that works around the broken Ultralytics export path on TensorRT 11.'
+          }
+        },
+        {
+          name: { zh: '三态判定策略', en: 'Tri-state Verdict Policy' },
+          desc: {
+            zh: '检出缺陷 → NG；仅良品框 → OK；一个框都不画 → 需复核。产线实测「沉默」时漏检率 56%，是画出良品框时（6%）的 9 倍 —— 系统把沉默升级为琥珀色提示而不是默认放行。',
+            en: 'Any defect → NG; only an OK box → OK; no box at all → needs review. Measured on the line, "silence" carries a 56% miss rate — 9× the OK-box case (6%) — so the app escalates it with an amber prompt instead of passing it.'
+          }
+        },
+        {
+          name: { zh: '数据回流闭环', en: 'Data Feedback Loop' },
+          desc: {
+            zh: '每次检测把模型检测（类别 / 置信度 / OBB 坐标）与人工判定写入同一份样品级 JSON；作业员在标签网格上确认或改判，「存入同一样品」支持单样品多角度拍摄；保存的原图与人工标注直接成为下一轮微调数据。',
+            en: 'Every inspection stores model detections (class / confidence / OBB coordinates) and the operator verdict in one per-sample JSON; operators confirm or correct on a label grid, with multi-angle shots grouped per physical sample — saved originals plus human labels feed the next fine-tuning round directly.'
+          }
+        },
+        {
+          name: { zh: '评估与可解释性工具链', en: 'Evaluation & Interpretability Tooling' },
+          desc: {
+            zh: 'evaluate_model.py 按产线口径回放全部记录输出图像级 / 样品级指标；模型对比固定在冻结测试集上进行；GradCAM 热力图与遮挡实验（删除 / 保留 / 对照）验证模型注意力，盲标协议审计真值一致性。',
+            en: 'evaluate_model.py replays all records to report image- and sample-level metrics in the exact terms the line uses; model comparisons run on a frozen test set; GradCAM heatmaps and occlusion tests (delete / keep / control) verify model attention while a blind-relabel protocol audits ground-truth consistency.'
+          }
+        }
+      ],
+      challenges: [
+        {
+          problem: {
+            zh: '交接的基线模型精确率 97.6% 看似优秀，但产线逐张记录 1,334 张图像后实测：图像级 NG 召回率仅 35.6%，三分之二的缺陷图像被放行。',
+            en: 'The inherited baseline looked good at 97.6% precision, but logging 1,334 production images revealed image-level NG recall of only 35.6% — two of three defective images passed.'
+          },
+          solution: {
+            zh: '应用从第一天起并排记录模型检测与人工判定，让生产数据兼作评估集；以此为基础做根因分析与闭环微调，冻结测试集召回率 59.1% → 84.3%，交付验收实测（8,224 张 / 2,060 个样品）单张 NG 检出率 96.1%、样品级 99.6%、过杀率 0.15%。',
+            en: 'The app logged model detections and operator verdicts side by side from day one, making production data double as an evaluation set; root-cause analysis plus closed-loop fine-tuning lifted frozen-test recall from 59.1% to 84.3%, and the acceptance run (8,224 images / 2,060 samples) measured 96.1% per-image and 99.6% sample-level NG recall at a 0.15% false-alarm rate.'
+          }
+        },
+        {
+          problem: {
+            zh: '良品框约占整图 70%，超出 YOLO-OBB 框回归的表达上限（DFL reg_max × stride）：框被截断到真实尺寸的 54–87%，置信度封顶 0.8，还产生 35 个重复误报框。',
+            en: 'The OK box spans ~70% of the image — beyond the YOLO-OBB regression range (DFL reg_max × stride): boxes truncated to 54–87% of true size, confidence capped at 0.8, and 35 duplicate false alarms.'
+          },
+          solution: {
+            zh: '识别出这是架构施加的标签约束而非数据噪声：将良品标签长边收缩至 ≤600 px @1280，使回归目标可达 —— 部署模型良品框 mAP50-95 从 0.58 升至 0.99，重复误报消除。',
+            en: 'Recognized this as an architecture-imposed label constraint, not data noise: capping the OK label long side at ≤600 px @1280 made regression targets reachable — the deployed model\'s OK-box mAP50-95 rose from 0.58 to 0.99 and duplicate false alarms were eliminated.'
+          }
+        },
+        {
+          problem: {
+            zh: '严重类别失衡叠加关键缺陷难检出：良品框 650 个而多数缺陷类 ≤25 个、3 个类别 ≤5 个样本；芯线反折目标极小且被防水塞遮挡，640 px 分辨率下召回率仅 3.8%。',
+            en: 'Severe class imbalance compounded a hard key defect: 650 OK boxes vs ≤25 for most defect classes (three classes ≤5 samples), while core-wire-bent-back is tiny and occluded by the waterproof plug — 3.8% recall at 640 px.'
+          },
+          solution: {
+            zh: '重建数据管线：按实体样品 ID 划分防止泄漏、稀有类分层、LVIS repeat-factor 过采样、合并重映射历史数据集（+516 张，稀有类 ≥140 实例），训练与推理尺寸 640 → 1280 —— 部署模型该缺陷验证集召回率达 97%（AP50 0.95）。',
+            en: 'Rebuilt the pipeline: sample-ID splits against leakage, rare-class stratification, LVIS repeat-factor oversampling, merged remapped legacy sets (+516 images, every rare class ≥140 instances), and 640 → 1280 px training/inference — the deployed model now hits 97% val recall on that defect (AP50 0.95).'
+          }
+        },
+        {
+          problem: {
+            zh: '标注口径本身拖累模型与统计：作业员标签与模型类别不一致、同一缺陷两种叫法、新旧批次宽严不一，且删除存疑标注框会把缺陷留作「背景」教模型忽略。',
+            en: 'Label taxonomy itself dragged down both the model and the statistics: operator labels missing from the model classes, one defect under two names, inconsistent strictness between batches — and deleting a doubtful box leaves the defect as "background", teaching the model to ignore it.'
+          },
+          solution: {
+            zh: '口径治理：新增第 14 类、同义标签归一、逐框复核 147 个不一致标注；含存疑缺陷的图像整图排除出训练集；每次模型更新固定在冻结测试集上回归，确保数字可比。',
+            en: 'Taxonomy governance: added the 14th class, unified duplicate names, re-reviewed 147 inconsistent boxes; ambiguous images are excluded from training entirely; every model update regresses on the same frozen test set so the numbers stay comparable.'
+          }
+        },
+        {
+          problem: {
+            zh: '验收统计里的「真值」本身被污染：作业员标注时画面上同时显示模型的框与类别，判定被模型锚定，模型的真实性能被系统性低估。',
+            en: 'The "ground truth" in the acceptance statistics was itself contaminated: operators label with the model\'s boxes and classes on screen, anchoring their verdicts — the model\'s real performance was systematically underestimated.'
+          },
+          solution: {
+            zh: '对全部 64 组分歧做不看模型结果的盲复核，先用 24 组无分歧样本对照验证方法可信（100% 复现）—— 结果模型在 44% 的分歧中是对的：单张检出率修正 92.5% → 96.1%，过杀率 0.199% → 0.146%。锚定是流程问题而非人的问题，定期盲复核已纳入评估流程。',
+            en: 'Blind re-review of all 64 disagreements without the model\'s output visible, method-validated first by a 24/24 control group of agreeing samples — the model turned out right in 44% of them: per-image recall corrected 92.5% → 96.1%, false-alarm rate 0.199% → 0.146%. Anchoring is a process problem, not a people problem, and periodic blind review is now part of the evaluation loop.'
           }
         }
       ]
